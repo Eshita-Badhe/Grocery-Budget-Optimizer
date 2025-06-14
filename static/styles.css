@@ -1,0 +1,59 @@
+*
+{
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 1rem;
+}
+body
+{
+    background-color: rgb(255, 217, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container
+{
+    width: 75%;
+    background-color: rgb(254, 221, 129);
+}
+.container, .cards ,.input ,.result
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: rgb(181, 181, 181);
+}
+
+.cards
+{
+    width: 90%;
+}
+.buttons, .statistics
+{
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+}
+.buttons button
+{
+    background-color: orange;
+    color: black;
+    font-weight: bold;
+    align-content: center;
+    border: none;
+    transform: scale();
+    padding: .85rem;
+    width: 9rem;
+}
+button:hover
+{
+    transform: scale(1.1);
+}
+.input , .result
+{
+    width: 40%;
+    background: white;
+}
