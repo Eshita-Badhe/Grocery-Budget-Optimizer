@@ -221,17 +221,29 @@ button:hover
         width: 90%;
     }
 
-    .buttons button, .download-btn {
+    .buttons button {
         width: 90%;
         font-size: 1rem;
     }
 
     .bill-table {
         font-size: 0.8rem;
+        width: 70%;
     }
 
     .section-heading {
         font-size: 1.4rem;
     }
+
+    #statsChart
+    {
+        width: 70%;
+    }
+
+    .download-btn
+    {
+        width: 70%;
+    }
+
 }
 
