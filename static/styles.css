@@ -185,15 +185,14 @@ button:hover
     background-color: #e69500;
 }
 
-/* 
+
 @media (max-width: 600px) {
-    .container {
+ .container {
         width: 95%;
-        padding: 1rem;
     }
 
     h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
         margin: 1rem 0;
     }
 
@@ -207,46 +206,28 @@ button:hover
         align-items: flex-start;
     }
 
-    .label {
+    .label, .input {
         width: 100%;
-        font-size: 0.8rem;
-    }
-
-    .input {
-        width: 100%;
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
     .buttons {
         flex-direction: column;
         gap: 0.5rem;
+        width: 100%;
     }
 
-    .buttons button {
+    .buttons button, .download-btn {
         width: 100%;
-        font-size: 0.8rem;
+        font-size: 1rem;
     }
 
     .bill-table {
         font-size: 0.8rem;
-        overflow-x: auto;
-    }
-
-    .bill-table th, .bill-table td {
-        padding: 8px;
     }
 
     .section-heading {
         font-size: 1.4rem;
     }
+}
 
-    .download-btn {
-        width: 100%;
-        font-size: 1rem;
-    }
-
-    #statsChart {
-        width: 100% !important;
-        height: auto !important;
-    }
-} */
