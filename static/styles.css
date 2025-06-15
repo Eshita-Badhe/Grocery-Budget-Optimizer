@@ -185,7 +185,7 @@ button:hover
     background-color: #e69500;
 }
 
-
+/* 
 @media (max-width: 600px) {
     .container {
         width: 95%;
@@ -249,4 +249,4 @@ button:hover
         width: 100% !important;
         height: auto !important;
     }
-}
+} */
