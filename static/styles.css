@@ -1,8 +1,8 @@
 *
 {
-    padding: 1rem;
-    margin: 1rem;
-    border-radius: 1rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
 }
 body
 {
@@ -11,12 +11,24 @@ body
     flex-direction: column;
     align-items: center;
 }
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin: 2rem 0 1rem 0;
+    text-align: center;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
 .container
 {
     width: 75%;
     background-color: rgb(254, 221, 129);
+    border: 2px solid rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-.container, .cards ,.input ,.result
+.container, .cards ,.user ,.result, .card
 {
     display: flex;
     flex-direction: column;
@@ -29,6 +41,7 @@ body
 .cards
 {
     width: 90%;
+    flex-wrap: wrap;
 }
 .buttons, .statistics
 {
@@ -37,7 +50,7 @@ body
     gap: 2rem;
     align-items: center;
 }
-.buttons button
+.buttons button 
 {
     background-color: orange;
     color: black;
@@ -45,15 +58,195 @@ body
     align-content: center;
     border: none;
     transform: scale();
-    padding: .85rem;
+    padding: .5rem;
     width: 9rem;
+    font-size: 0.6rem;
 }
 button:hover
 {
     transform: scale(1.1);
 }
-.input , .result
+
+.card {
+  width: 70%;
+  max-width: 900px;
+  border: 0.2rem solid #ccc;
+  border-radius: 0.7rem;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.label {
+  width: 30%;
+  font-weight: 500;
+  margin: 0;
+  text-align: left;
+  font-size: 0.7rem;
+}
+
+.input {
+  padding: 0.3rem;
+  border-radius: 0.5rem;
+  border: 0.1rem solid #aaa;
+  font-size: 0.7rem;
+  width: 70%;
+  margin: 0;
+  flex:1;
+  font-size: 0.7rem;
+}
+
+.card .buttons
 {
-    width: 40%;
-    background: white;
+    margin: 0;
+    padding: 0;
+}
+
+.buttons .remove_btn, .buttons .add_btn
+{
+    background-color: rgb(254, 221, 129);
+    border: 0.1rem solid rgb(255, 205, 66);
+}
+
+.section-heading {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Optimized Bill Table */
+.bill-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto 30px auto;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.bill-table thead {
+    background-color: #ffa500;
+    color: white;
+    font-weight: bold;
+}
+
+.bill-table th {
+    border-radius: 0 !important;
+}
+
+.bill-table th, .bill-table td {
+    padding: 12px 16px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.bill-table tfoot td {
+    background-color: #f7f7f7;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Statistics Chart */
+#statsChart {
+    display: block;
+    margin: 0 auto 30px auto;
+}
+
+/* Download Button */
+.download-btn {
+    display: block;
+    background-color: #ffa500;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 auto 40px auto;
+    transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+    background-color: #e69500;
+}
+
+
+@media (max-width: 600px) {
+    .container {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        margin: 1rem 0;
+    }
+
+    .card {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    .row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .label {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+
+    .input {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .buttons button {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+
+    .bill-table {
+        font-size: 0.8rem;
+        overflow-x: auto;
+    }
+
+    .bill-table th, .bill-table td {
+        padding: 8px;
+    }
+
+    .section-heading {
+        font-size: 1.4rem;
+    }
+
+    .download-btn {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    #statsChart {
+        width: 100% !important;
+        height: auto !important;
+    }
 }

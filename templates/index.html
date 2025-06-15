@@ -8,20 +8,54 @@
         <div class="container">
             <h1>Grocery Budget Optimizer</h1>
             <div class="cards">
-
+              <div class="card">
+                <div class="row">
+                  <div class="label">Budget:</div>
+                  <input type="number" placeholder="Enter your Budget" class="input" id="budget">
+                </div>
+              </div>
             </div>
+
+            <div class="cards" id="cards"></div>
+
             <div class="buttons">
-                <button>Add Item</button>
-                <button>Remove Item</button>
+                <button onclick="createCard()">Add Item</button>
+                <button onclick="submit()" id="submit">Submit</button>
             </div>
-        </div>
-        <div class="statistics">
-            <div class="input">
+        <div id="resultContainer" style="display: none;">
+              <h2 class="section-heading">Optimized Grocery Bill</h2>
 
-            </div>
-            <div class="result">
-                
-            </div>
+              <table class="bill-table">
+                  <thead>
+                      <tr>
+                          <th>Item</th>
+                          <th>Price per Qty</th>
+                          <th>Quantity</th>
+                          <th>Status</th>
+                          <th>Total</th>
+                      </tr>
+                  </thead>
+                  <tbody id="billTableBody"></tbody>
+                  <tfoot>
+                      <tr>
+                          <td colspan="4" style="text-align:right"><strong>Total Spent</strong></td>
+                          <td id="totalSpentCell"></td>
+                      </tr>
+                  </tfoot>
+              </table>
+
+              <canvas id="statsChart" width="400" height="300"></canvas>
+
+              <button onclick="downloadBill()" class="download-btn">Download Optimized Bill</button>
+          </div>
+         </div>
+
         </div>
+        <script src="{{ url_for('static',filename='script.js')}}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
     </body>
 </html>
