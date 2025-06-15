@@ -185,7 +185,7 @@ button:hover
     background-color: #e69500;
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 786px) {
  .container {
         width: 95%;
     }
@@ -196,11 +196,11 @@ button:hover
     }
 
     .cards{
-        width: 100%;
+        width: 90%;
     }
     
     .card {
-        width: 100%;
+        width: 90%;
         padding: 1rem;
     }
 
@@ -210,18 +210,18 @@ button:hover
     }
 
     .label, .input {
-        width: 100%;
+        width: 90%;
         font-size: 1rem;
     }
 
     .buttons {
         flex-direction: column;
         gap: 0.5rem;
-        width: 100%;
+        width: 90%;
     }
 
     .buttons button, .download-btn {
-        width: 100%;
+        width: 90%;
         font-size: 1rem;
     }
 
