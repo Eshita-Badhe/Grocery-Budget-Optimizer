@@ -228,7 +228,7 @@ button:hover
 
     .bill-table {
         font-size: 0.8rem;
-        width: 70%;
+        width: 50%;
     }
 
     .section-heading {
@@ -237,12 +237,12 @@ button:hover
 
     #statsChart
     {
-        width: 70%;
+        width: 50%;
     }
 
     .download-btn
     {
-        width: 70%;
+        width: 50%;
     }
 
 }
