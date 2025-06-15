@@ -22,7 +22,6 @@ A full-stack web application that helps users optimize their grocery list based 
 - Displays both original and optimized lists
 - Visual feedback using alerts and pie charts
 - Option to download optimized bill
-- Mobile-friendly & user-interactive UI
 
 ## 📚 Tech Stack
 
@@ -40,19 +39,31 @@ A full-stack web application that helps users optimize their grocery list based 
 
 ## 🔗 Links
 
-- **Live App**: [Deployed Link]
-- **Video Demo**: *(optional if you have one)*
-- **LinkedIn Post**: [LinkedIn Post URL]
+- **Live App**: [Deployed Link](https://budgetbuddy-grocery-budget-optimizer.onrender.com/)
 
 ## 📸 Screenshots
 
-*(Include 2–3 screenshots of UI/UX and optimization results here)*
+
+<img src="https://github.com/Eshita-Badhe/Grocery-Budget-Optimizer/blob/main/images/home.png" width="100%" alt="Home page">
+<img src="https://github.com/Eshita-Badhe/Grocery-Budget-Optimizer/blob/main/images/input.png" width="100%" alt="Testing inputs">
+<img src="https://github.com/Eshita-Badhe/Grocery-Budget-Optimizer/blob/main/images/output.png" width="100%" alt="Testing Output">
+<img src="https://github.com/Eshita-Badhe/Grocery-Budget-Optimizer/blob/main/images/Final_list.png" width="100%" alt="Downloaded_final_optimized_list">
+
 
 ## 🤝 Contributions
 
 Feel free to fork the repo, raise issues or submit PRs! Suggestions are always welcome!
 
----
 
-Made with 💛 by Eshita
+## License
 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
+## 📬 Contact
+Feel free to reach out.
+<ul>
+    <li><strong>Name:</strong> Eshita Badhe</li>
+    <li><strong>Email:</strong> sge.eshita31gb@gmail.com</li>
+    <li><strong>GitHub:</strong> <a href="https://github.com/Eshita-Badhe">https://github.com/Eshita-Badhe</a></li>
+</ul>
