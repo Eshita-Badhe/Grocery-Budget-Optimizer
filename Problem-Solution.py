@@ -13,20 +13,11 @@
 from math import floor
 input_data = {
     1: { "item": "Flour", "qty": 2, "price": 40, "priority": 1 },
-    2: { "item": "Honey", "qty": 1, "price": 320, "priority": 2 },
-    3: { "item": "Ghee", "qty": 1, "price": 520, "priority": 2 },
-    4: { "item": "Butter", "qty": 1, "price": 250, "priority": 3 }
+    2: { "item": "Honey", "qty": 1, "price": 320, "priority": 3 },
+    3: { "item": "Ghee", "qty": 1, "price": 520, "priority": 3 },
+    4: { "item": "Butter", "qty": 1, "price": 250, "priority": 2 }
 }
 budget = 700
-
-valid_units = [1.0, 0.75, 0.5, 0.25]
-
-def get_valid_qty(budget_left, price):
-    for unit in valid_units:
-        if unit * price <= budget_left:
-            return unit
-    return 0 
-
 
 # Convert dict to list
 items = list(input_data.values())
@@ -55,11 +46,11 @@ else:
             final_list.append(item_copy)
             remaining_budget -= cost
         else:
-            unit_qty = get_valid_qty(remaining_budget, item["price"])
-            if unit_qty > 0:
-                item_copy["qty"] = unit_qty
+            affordable_qty = min(item["qty"], floor(remaining_budget / item["price"]))
+            if affordable_qty > 0:
+                item_copy["qty"] = affordable_qty
                 item_copy["status"] = "Partial"
-                remaining_budget -= unit_qty * item["price"]
+                remaining_budget -= affordable_qty * item["price"]
                 final_list.append(item_copy)
             else:
                 item_copy["status"] = "Skipped"

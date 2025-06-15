@@ -19,15 +19,7 @@ def homepage():
 
 def optimizer():
     global final_list,remaining_budget
-    valid_units = [1.0, 0.75, 0.5, 0.25]
-
-    def get_valid_qty(budget_left, price):
-        for unit in valid_units:
-            if unit * price <= budget_left:
-                return unit
-        return 0 
-
-
+    
     items = input_data.copy()
     items.sort(key=lambda x: x["priority"])
 
@@ -53,11 +45,11 @@ def optimizer():
                 final_list.append(item_copy)
                 remaining_budget -= cost
             else:
-                unit_qty = get_valid_qty(remaining_budget, item["price"])
-                if unit_qty > 0:
-                    item_copy["qty"] = unit_qty
+                affordable_qty = min(item["qty"], floor(remaining_budget / item["price"]))
+                if affordable_qty > 0:
+                    item_copy["qty"] = affordable_qty
                     item_copy["status"] = "Partial"
-                    remaining_budget -= unit_qty * item["price"]
+                    remaining_budget -= affordable_qty * item["price"]
                     final_list.append(item_copy)
                 else:
                     item_copy["status"] = "Skipped"
