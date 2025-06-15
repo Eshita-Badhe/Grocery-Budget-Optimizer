@@ -185,8 +185,7 @@ button:hover
     background-color: #e69500;
 }
 
-
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 780px) {
  .container {
         width: 95%;
     }
@@ -196,8 +195,12 @@ button:hover
         margin: 1rem 0;
     }
 
+    .cards{
+        width: 100%;
+    }
+    
     .card {
-        width: 95%;
+        width: 100%;
         padding: 1rem;
     }
 
