@@ -60,7 +60,7 @@ h1 {
     transform: scale();
     padding: .5rem;
     width: 9rem;
-    font-size: 0.6rem;
+    font-size: 1rem;
 }
 button:hover
 {
@@ -94,7 +94,7 @@ button:hover
   font-weight: 500;
   margin: 0;
   text-align: left;
-  font-size: 0.7rem;
+  font-size: 1rem;
 }
 
 .input {
@@ -105,7 +105,7 @@ button:hover
   width: 70%;
   margin: 0;
   flex:1;
-  font-size: 0.7rem;
+  font-size: 1rem;
 }
 
 .card .buttons
