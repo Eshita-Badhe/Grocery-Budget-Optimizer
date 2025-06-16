@@ -70,7 +70,7 @@ function createCard() {
             isNaN(parseFloat(priceInput.value)) ||
             isNaN(parseInt(priorityInput.value))
         ) {
-            alert("Please fill all fields correctly.");
+            Swal.fire("Invalid Budget", "Please fill all fields correctly.", "warning");
             return;
         }
 
