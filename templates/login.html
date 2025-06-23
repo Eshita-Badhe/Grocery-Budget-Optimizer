@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Grocery Budget Optimizer</title>
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles.css') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='BB-GBO-logo.png') }}">
+    <style>
+        .container{
+            width: 50%;
+        }
+        form{
+            width: 80%;
+        }
+    </style>    
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div id="flash-container">
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    <div class="container">
+        <h2>Login</h2>
+        <form method="POST" action="/login">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+
+            <div class="inline"><input type="checkbox" name="remember" class="checkbox">Remember Me</div>
+
+            <div class="buttons"><button type="submit">Login</button></div>
+        </form>
+        
+        <p>Forgot Password? <a href="/reset_pass">Reset</a></p>
+        <p>Don't have an account? <a href="/reg_page">Register</a></p>
+
+    </div>
+    <script src="{{ url_for('static',filename='script.js')}}"></script>
+
+</body>
+</html>

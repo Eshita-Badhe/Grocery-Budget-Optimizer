@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Grocery Budget Optimizer</title>
+
+        <link rel="stylesheet" href="{{ url_for('static',filename='styles.css') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='BB-GBO-logo.png') }}">
+        
+    </head>
+    <body>
+        <div class="container">
+            <h1>Grocery Budget Optimizer</h1>
+            <div class="buttons">
+                <button onclick="document.location='/home'">Try without login</button>
+                <button onclick="document.location='/login_page'" id="submit">Login to keep records</button>
+            </div>
+        </div>
+        <script src="{{ url_for('static',filename='script.js')}}"></script>
+
+    </body>
+</html>

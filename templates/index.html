@@ -20,7 +20,18 @@
               </div>
             </div>
 
-            <div class="cards" id="cards"></div>
+            <div class="cards" id="cards">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div id="flash-container">
+                            {% for category, message in messages %}
+                                <div class="alert {{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+            </div>
 
             <div class="buttons">
                 <button onclick="createCard()">Add Item</button>
