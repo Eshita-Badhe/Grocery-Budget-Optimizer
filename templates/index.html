@@ -6,9 +6,55 @@
 
         <link rel="stylesheet" href="{{ url_for('static',filename='styles.css') }}">
         <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='BB-GBO-logo.png') }}">
-        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <style>
+            .body
+            {
+                display: flex;
+                flex-direction: column;
+            }
+            .nav
+            {
+                display: flex;
+                justify-content: right;
+                height: 2rem;
+                top: 0;
+                z-index: 2000;
+                width: 100%;
+                font-size: medium;
+            }
+            a{
+                text-decoration: none;
+                transition: none;
+            }
+            a:hover{
+                text-decoration: none !important;
+            }
+            .nav div{
+                margin: 0;
+                padding: 0.1rem;
+            }
+            .nav div:hover
+            {
+                border: 1px solid orange;
+            }
+        </style>
     </head>
     <body>
+        <div class="nav">
+            <a href="/profile">
+            <div class="profile">
+                Profile
+                <i class="fa-solid fa-user"></i>
+            </div>
+            </a>
+            <a href="/history">
+            <div class="history">
+                History
+                <i class="fa-solid fa-clock-rotate-left"></i>
+            </div>
+            </a>
+        </div>
         <div class="container">
             <h1>Grocery Budget Optimizer</h1>
             <div class="cards">

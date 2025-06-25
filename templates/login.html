@@ -9,12 +9,32 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='BB-GBO-logo.png') }}">
     <style>
         .container{
-            width: 50%;
+            max-width: 500px;
         }
-        form{
-            width: 80%;
+        /* Inline checkbox styling */
+        .inline {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin: 1rem 0;
+        font-size: 1rem;
+        width: fit-content;
+        padding: 0;
         }
-    </style>    
+
+        /* Checkbox styling */
+        .inline input[type="checkbox"] {
+        transform: scale(1.2);
+        margin: 0;
+        }
+
+        /* Optional: tighten label */
+        .inline label {
+        margin: 0;
+        font-weight: normal;
+        }
+    </style>  
 </head>
 <body>
     {% with messages = get_flashed_messages(with_categories=true) %}

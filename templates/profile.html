@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile | Grocery Budget Optimizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='BB-GBO-logo.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .user-info {
+            margin: 2rem 0;
+            font-size: 1.1rem;
+        }
+
+        .info-row {
+            margin: 1rem 0;
+        }
+
+        .profile-btns {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: orange;
+            border: none;
+            border-radius: 12px;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            color: black;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: darkorange;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome, {{ current_user.username }}</h2>
+
+        <div class="user-info">
+            <div class="info-row"><strong>Username:</strong> {{ current_user.username }}</div>
+            <div class="info-row"><strong>Name:</strong>{{ current_user.name }}</div>
+            <div class="info-row"><strong>Email:</strong> {{ current_user.email }}</div>
+        </div>
+
+        <div class="profile-btns">
+            <a href="/reset_pass" class="btn"><i class="fas fa-lock"></i> Change Password</a>
+            <a href="/history" class="btn"><i class="fas fa-clock-rotate-left"></i> View History</a>
+        </div>
+    </div>
+</body>
+</html>
