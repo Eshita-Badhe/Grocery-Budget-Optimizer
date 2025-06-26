@@ -61,22 +61,14 @@
               <div class="card">
                 <div class="row">
                   <div class="label">Budget:</div>
-                  <input type="number" placeholder="Enter your Budget" class="input" id="budget">
-                </div>
+                    <input type="number" placeholder="Enter your Budget" class="input" id="budget" 
+                           value="{{ budget if from_history else '' }}">
+                  </div>
               </div>
             </div>
 
             <div class="cards" id="cards">
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        <div id="flash-container">
-                            {% for category, message in messages %}
-                                <div class="alert {{ category }}">{{ message }}</div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                {% endwith %}
-
+                
             </div>
 
             <div class="buttons">
@@ -117,6 +109,39 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+        
+        {% if from_history %}
+        <script>
+            const originalList = {{ original_list | tojson | safe }};
+            const optimizedList = {{ optimized_list | tojson | safe }};
+            const budgetFromHistory = {{ budget | tojson | safe }};
+            const statsFromHistory = {{ statistics | tojson | safe }};
+            console.log("From history", originalList, optimizedList, budgetFromHistory);
+
+            window.onload = function () {
+                document.getElementById("budget").value = budgetFromHistory;
+
+                originalList.forEach(item => {
+                    createCard(item.item, item.price, item.qty, item.unit, item.priority);
+                });
+
+                if (optimizedList.length > 0) {
+                    renderBillFromHistory(optimizedList,statsFromHistory);
+                }
+            };
+        </script>
+        {% else %}
+        <script>
+            originalList = [];
+            optimizedList = [];
+            budgetFromHistory = "";
+
+            window.onload = function () {
+            };
+        </script>
+        {% endif %}
+
+
 
     </body>
 </html>

@@ -14,7 +14,7 @@ from itsdangerous import URLSafeTimedSerializer
 import time
 import re
 from datetime import datetime, timedelta
-
+import json
 
 load_dotenv()
 
@@ -341,9 +341,49 @@ def reg_page():
 def profile():
     return render_template('profile.html')
 
+@app.route('/history')
+@login_required
+def history():
+    cursor = mysql.connection.cursor()
+    cursor.execute("""
+        SELECT id, timestamp, budget, spent, savings
+        FROM history
+        WHERE user_id = %s
+        ORDER BY timestamp DESC
+    """, (current_user.id,))
+    history = cursor.fetchall()
+    return render_template('history.html', history=history)
+
+@app.route('/replay/<int:history_id>')
+@login_required
+def replay(history_id):
+    cursor = mysql.connection.cursor()
+    cursor.execute("""
+        SELECT original_list, optimized_list, budget, spent, savings
+        FROM history
+        WHERE id = %s AND user_id = %s
+    """, (history_id, current_user.id))
+    data = cursor.fetchone()
+
+    statistics = {
+    "spent": data['spent'],
+    "savings": data['savings']
+    }
+    if not data:
+        return "Not Found", 404
+
+    return render_template('index.html',
+                           original_list=json.loads(data['original_list']),
+                           optimized_list=json.loads(data['optimized_list']),
+                           budget=data['budget'],
+                           spent=data['spent'],
+                           savings=data['savings'],
+                           statistics=statistics,
+                           from_history=True)
+
 
 def optimizer():
-    global final_list,remaining_budget
+    global final_list,remaining_budget,input_data
     
     items = input_data.copy()
     items.sort(key=lambda x: x["priority"])
@@ -420,7 +460,7 @@ def remove_item():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    global budget
+    global budget,input_data,final_list
     budget = request.get_json()
     budget=budget['budget']
     optimizer()
@@ -429,6 +469,24 @@ def submit():
         "savings": round(remaining_budget, 2),
         "skipped": [item["item"] for item in final_list if item["status"] == "Skipped"]
     }
+
+     # ✅ Save history only if user is logged in
+    if current_user.is_authenticated:
+        cursor = mysql.connection.cursor()
+        cursor.execute("""
+            INSERT INTO history (user_id, timestamp, original_list, optimized_list, budget, savings, spent)
+            VALUES (%s, %s, %s, %s,%s,%s,%s)
+        """, (
+            current_user.id,
+            datetime.now(),
+            json.dumps(input_data),
+            json.dumps(final_list),
+            budget,
+            round(budget - remaining_budget, 2),
+            round(remaining_budget, 2)
+        ))
+        mysql.connection.commit()
+
     flash("Final optimization complete")
     return jsonify({
         "Final_list": final_list,

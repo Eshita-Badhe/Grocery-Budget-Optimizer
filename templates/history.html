@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Grocery Budget Optimizer</title>
+
+        <link rel="stylesheet" href="{{ url_for('static',filename='styles.css') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='BB-GBO-logo.png') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <style>
+            .list{
+                width: 90%;
+                border: solid grey 0.1rem;
+                border-radius: 10px;
+                background-color: white;
+            }
+            a:hover{
+                text-decoration: none;
+            }
+            .list .apart{
+                display: flex;
+                justify-content: space-between;
+                margin: none;
+                padding: none;
+            }
+            .apart button{
+                max-width: fit-content;
+                max-height: fit-content;
+                border-radius: 50%;
+                font-size: 1rem;
+                padding: 0.1rem;
+                bottom: 50%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            
+            <h2>Your Submission History</h2>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+            {% for item in history %}
+            <div class="list">
+        
+                <strong>Date:</strong> {{ item.timestamp }} |
+                <strong>Budget:</strong> ₹{{ item.budget }} |
+                <strong>Spent:</strong> ₹{{ item.spent }} |
+                <strong>Savings:</strong> ₹{{ item.savings }}
+                <div class="apart">
+                    <a href="{{ url_for('replay', history_id=item.id) }}">🔁 Reopen This Session</a>
+                    <button class="delete-btn" onclick="deleteFromHistory()">
+                        <i class="fa-solid fa-trash"></i> 
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+
+        </div>
+    </body>
+</html>
+
+

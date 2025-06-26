@@ -1,4 +1,4 @@
-function createCard() {
+function createCard(name = '', price = '', qty = '', unit = '', priority = '') {
     let card = document.createElement("div");
     card.className = "card";
 
@@ -19,26 +19,31 @@ function createCard() {
     itemInput.type = "text";
     itemInput.className = "input";
     itemInput.placeholder = "Name";
+    itemInput.value = name;
 
     let qtyInput = document.createElement("input");
     qtyInput.type = "number";
     qtyInput.className = "input";
     qtyInput.placeholder = "Qty";
+    qtyInput.value = qty;
 
     let unitInput = document.createElement("input");
     unitInput.type = "text";
     unitInput.className = "input";
     unitInput.placeholder = "Unit";
+    unitInput.value = unit;
 
     let priceInput = document.createElement("input");
     priceInput.type = "number";
     priceInput.className = "input";
     priceInput.placeholder = "Price per qty";
+    priceInput.value = price;
 
     let priorityInput = document.createElement("input");
     priorityInput.type = "number";
     priorityInput.className = "input";
     priorityInput.placeholder = "1 to 5";
+    priorityInput.value = priority;
 
     card.appendChild(makeRow("Item :", [itemInput]));
     card.appendChild(makeRow("Quantity :", [qtyInput, unitInput]));
@@ -70,7 +75,7 @@ function createCard() {
             isNaN(parseFloat(priceInput.value)) ||
             isNaN(parseInt(priorityInput.value))
         ) {
-            Swal.fire("Invalid Budget", "Please fill all fields correctly.", "warning");
+            Swal.fire("Invalid Input", "Please fill all fields correctly.", "warning");
             return;
         }
 
@@ -80,8 +85,10 @@ function createCard() {
     buttons.appendChild(remove);
     buttons.appendChild(add);
     card.appendChild(buttons);
+
     document.getElementById("cards").appendChild(card);
 }
+
 
 function add_to_the_list(card, addButton) {
     let inputs = card.querySelectorAll("input");
@@ -288,6 +295,51 @@ function submit() {
 
         document.getElementById("resultContainer").style.display = 'block';
     });
+}
+
+
+function renderBillFromHistory(result, stats) {
+    const tableBody = document.getElementById("billTableBody");
+    tableBody.innerHTML = '';
+    let totalSpent = 0;
+
+    result.forEach(item => {
+        const total = item.price * item.qty;
+        totalSpent += total;
+
+        const row = `<tr>
+            <td>${item.item}</td>
+            <td>₹${item.price}</td>
+            <td>${item.qty}</td>
+            <td>${item.status}</td>
+            <td>₹${total.toFixed(2)}</td>
+        </tr>`;
+        tableBody.innerHTML += row;
+    });
+
+    document.getElementById("totalSpentCell").innerText = `₹${totalSpent}`;
+
+    if (chartInstance) chartInstance.destroy();
+    const ctx = document.getElementById('statsChart').getContext('2d');
+    chartInstance = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Spent', 'Savings'],
+            datasets: [{
+                data: [stats.spent, stats.savings],
+                backgroundColor: ['#ff7043', '#66bb6a']
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'bottom' },
+                title: { display: true, text: 'Spending Summary' }
+            }
+        }
+    });
+
+    document.getElementById("resultContainer").style.display = 'block';
 }
 
 
