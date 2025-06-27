@@ -34,13 +34,22 @@
         </style>
     </head>
     <body>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div id="flash-container">
+                    {% for category, message in messages %}
+                        <div class="alert {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
         <div class="container">
             
             <h2>Your Submission History</h2>
 
             <div style="display: flex; flex-wrap: wrap; gap: 20px;">
             {% for item in history %}
-            <div class="list">
+            <div class="list" id="card{{item.id}}">
         
                 <strong>Date:</strong> {{ item.timestamp }} |
                 <strong>Budget:</strong> ₹{{ item.budget }} |
@@ -48,7 +57,7 @@
                 <strong>Savings:</strong> ₹{{ item.savings }}
                 <div class="apart">
                     <a href="{{ url_for('replay', history_id=item.id) }}">🔁 Reopen This Session</a>
-                    <button class="delete-btn" onclick="deleteFromHistory()">
+                    <button class="delete-btn" data-id="{{ item.id }}" onclick="deleteFromHistory.call(this)">
                         <i class="fa-solid fa-trash"></i> 
                     </button>
                 </div>
@@ -57,6 +66,7 @@
             </div>
 
         </div>
+        <script src="{{ url_for('static',filename='script.js')}}"></script>
     </body>
 </html>
 

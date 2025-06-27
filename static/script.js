@@ -87,6 +87,14 @@ function createCard(name = '', price = '', qty = '', unit = '', priority = '') {
     card.appendChild(buttons);
 
     document.getElementById("cards").appendChild(card);
+
+    // Automatically add to the list if values are prefilled
+    if (name && price && qty && unit && priority) {
+        // Ensure DOM is updated before triggering the function
+        setTimeout(() => {
+            add_to_the_list(card, add);
+        }, 0);
+}
 }
 
 
@@ -349,3 +357,24 @@ document.addEventListener("keypress", function(event) {
         document.getElementById("submit").click(); 
     }
 });
+
+
+function deleteFromHistory() {
+    const id = this.getAttribute('data-id');
+
+    fetch('/delete_from_history', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: id })
+    })
+    .then(data => {
+            const card = document.getElementById(`card${id}`);
+            console.log(`${id}`)
+            if (card) card.remove();
+        })
+    .catch(error => {
+        console.error("Delete error:", error);
+    });
+}

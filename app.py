@@ -211,13 +211,13 @@ def login():
         
         # Fetch user from DB
         cursor = mysql.connection.cursor()
-        cursor.execute("SELECT id, email, password FROM users WHERE email=%s", (email,))
+        cursor.execute("SELECT id, email, password,f_name,l_name,username FROM users WHERE email=%s", (email,))
         user_data = cursor.fetchone()
         cursor.close()
 
         if user_data and bcrypt.check_password_hash(user_data["password"], password):
             # Log the user in with "remember me" option
-            login_user(User(user_data["id"], user_data["email"]), remember=remember)
+            login_user(User(user_data["id"], user_data["email"], user_data["f_name"], user_data["l_name"], user_data["username"]), remember=remember)
 
             # Set session permanent and store pending login data
             session.permanent = True
@@ -381,6 +381,23 @@ def replay(history_id):
                            statistics=statistics,
                            from_history=True)
 
+@app.route('/delete_from_history', methods=["POST"])
+def delete_from_history():
+    try:
+        data = request.get_json()
+        id = data.get('id')
+
+        if not id:
+            return jsonify({'success': False, 'message': 'No ID provided'}), 400
+
+        cursor = mysql.connection.cursor()
+        cursor.execute("DELETE FROM history WHERE id = %s", (id,))
+        mysql.connection.commit()
+        cursor.close()
+        flash("Item deleted successfully!", "success")
+    except Exception as e:
+        flash(f"Error deleting item: {e}", "danger")
+    return render_template('history.html')
 
 def optimizer():
     global final_list,remaining_budget,input_data
@@ -445,7 +462,6 @@ def add_item():
     data = request.get_json()
     input_data.append(data)
     print("Received:", data)  
-    flash("Item received")
     return jsonify({"received_data": data})
 
 @app.route('/remove_item', methods=['POST'])
@@ -455,7 +471,6 @@ def remove_item():
 
     global input_data
     input_data = [item for item in input_data if item['item'] != item_to_remove]
-    flash("Item removed")
     return jsonify({"updated_data": input_data})
 
 @app.route('/submit', methods=['POST'])
@@ -487,7 +502,6 @@ def submit():
         ))
         mysql.connection.commit()
 
-    flash("Final optimization complete")
     return jsonify({
         "Final_list": final_list,
         "Statistics": stats
