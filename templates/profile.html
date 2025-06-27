@@ -43,6 +43,28 @@
     </style>
 </head>
 <body>
+    
+        <div class="nav">
+            <a href="/home">
+            <div class="home">
+                Home
+                <i class="fa-solid fa-house"></i>
+            </div>
+            </a>
+            <a href="/history">
+            <div class="history">
+                History
+                <i class="fa-solid fa-clock-rotate-left"></i>
+            </div>
+            </a>
+            <a href="/logout">
+                <div class="logout">
+                    Logout
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+            </a>
+        </div>
+
     <div class="container">
         <h2>Welcome, {{ current_user.username }}</h2>
 

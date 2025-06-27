@@ -34,6 +34,27 @@
         </style>
     </head>
     <body>
+        
+        <div class="nav">
+            <a href="/profile">
+            <div class="profile">
+                Profile
+                <i class="fa-solid fa-user"></i>
+            </div>
+            </a>
+            <a href="/home">
+            <div class="home">
+                Home
+                <i class="fa-solid fa-house"></i>
+            </div>
+            </a>
+            <a href="/logout">
+                <div class="logout">
+                    Logout
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+            </a>
+        </div>
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <div id="flash-container">

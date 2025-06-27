@@ -35,6 +35,32 @@ h2 {
   font-weight: bold;
 }
 
+.nav
+{
+    display: flex;
+    justify-content: right;
+    height: 2rem;
+    top: 0;
+    z-index: 2000;
+    width: 100%;
+    font-size: medium;
+}
+.nav a{
+    text-decoration: none;
+    transition: none;
+}
+.nav a:hover{
+    text-decoration: none !important;
+}
+.nav div{
+    margin: 0;
+    padding: 0.1rem;
+}
+.nav div:hover
+{
+    border: 1px solid orange;
+}
+
 .section-heading {
   font-size: 1.75rem;
   margin-bottom: 20px;
@@ -225,7 +251,7 @@ a:hover {
   border-radius: 8px;
   font-weight: bold;
   color: white;
-  background-color: #f44336;
+  background-color: #E65100;
   text-align: center;
 }
 

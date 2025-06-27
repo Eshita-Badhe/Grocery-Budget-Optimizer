@@ -25,12 +25,16 @@ budget=0
 final_list=[]
 remaining_budget=0
 
+
 # MySQL Configuration
 app.config['MYSQL_HOST'] = os.environ['MYSQL_HOST']
 app.config['MYSQL_USER'] = os.environ['MYSQL_USER']
 app.config['MYSQL_PASSWORD'] = os.environ['MYSQL_PASS']
 app.config['MYSQL_DB'] = os.environ['MYSQL_DB']
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+
+print("Connected to DB:", os.environ['MYSQL_HOST'])
+
 
 mysql = MySQL(app)
 bcrypt = Bcrypt(app)
@@ -319,6 +323,10 @@ def home():
         remaining_budget=0
         return render_template('index.html')
     return render_template("try_opt.html")
+
+@app.route('/home')
+def index_page():
+    return render_template('index.html')
 
 @app.route('/login_page')
 def login_page():
