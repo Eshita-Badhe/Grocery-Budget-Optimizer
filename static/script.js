@@ -242,6 +242,7 @@ function downloadBill() {
 
 
 let chartInstance;
+let history_id;
 
 function submit() {
     const budget = parseFloat(document.getElementById("budget").value.trim());
@@ -259,6 +260,7 @@ function submit() {
     .then(data => {
         const result = data.Final_list;
         const stats = data.Statistics;
+        history_id=data.history_id;
 
         const tableBody = document.getElementById("billTableBody");
         tableBody.innerHTML = '';
@@ -377,4 +379,26 @@ function deleteFromHistory() {
     .catch(error => {
         console.error("Delete error:", error);
     });
+}
+
+
+function share(){
+    
+    fetch('/generate_share_link', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ history_id: history_id })  
+})
+.then(res => res.json())
+.then(data => {
+    Swal.fire({
+        title: "Share this page!",
+        html: `<a href="${data.share_url}" target="_blank">${data.share_url}</a>`,
+        confirmButtonText: "Copy Link",
+        preConfirm: () => navigator.clipboard.writeText(data.share_url)
+    });
+});
+
 }

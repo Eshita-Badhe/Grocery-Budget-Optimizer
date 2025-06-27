@@ -15,6 +15,7 @@ import time
 import re
 from datetime import datetime, timedelta
 import json
+import uuid
 
 load_dotenv()
 
@@ -509,11 +510,51 @@ def submit():
             round(remaining_budget, 2)
         ))
         mysql.connection.commit()
+        history_id = cursor.lastrowid 
 
     return jsonify({
         "Final_list": final_list,
-        "Statistics": stats
+        "Statistics": stats,
+        'history_id': history_id
     })
+
+
+def generate_token():
+    return str(uuid.uuid4())
+
+@app.route('/generate_share_link', methods=['POST'])
+def generate_share_link():
+    data = request.get_json()
+    history_id = data['history_id']  # or fetch by user+timestamp if needed
+
+    token = generate_token()
+    cursor = mysql.connection.cursor()
+    cursor.execute("UPDATE history SET share_token = %s WHERE id = %s", (token, history_id))
+    mysql.connection.commit()
+    cursor.close()
+
+    share_url = url_for('shared_page', token=token, _external=True)
+    return jsonify({ 'share_url': share_url })
+
+@app.route('/shared/<token>')
+def shared_page(token):
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT * FROM history WHERE share_token = %s", (token,))
+    entry = cursor.fetchone()
+    cursor.close()
+
+    if entry:
+        original = json.loads(entry['original_list'])
+        optimized = json.loads(entry['optimized_list'])
+        budget = entry['budget']  # if stored
+        return render_template(
+            'index.html',
+            shared=True,
+            budget=budget,
+            original_list=original,
+            optimized_list=optimized
+        )
+    return "Invalid or expired link", 404
 
 
 if (__name__ == "__main__"):

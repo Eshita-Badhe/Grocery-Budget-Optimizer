@@ -59,7 +59,7 @@ h2, .section-heading {
 /* Container */
 .container {
   width: 75%;
-  max-width: 800px;
+  width: 800px;
   margin: 5vh auto;
   padding: 2rem;
   background-color: #ffe18f;
