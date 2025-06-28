@@ -277,7 +277,7 @@ a:hover {
   
   .bill-table {
     width: 70%;
-    margin-left: 0.1rem;
+    margin-left: 0;
     font-size: 0.8rem;
   }
 }
