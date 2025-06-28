@@ -240,7 +240,7 @@ a:hover {
 
   .container,
   .card {
-    width: 95%;
+    width: 99%;
     padding: 1rem;
   }
 
@@ -274,10 +274,15 @@ a:hover {
     font-size: 0.95rem;
   }
 
-  
+  .resultContainer{
+    padding: 0;
+  }
+
+
   .bill-table {
     width: 70%;
     margin-left: 0;
+    margin-right: 1rem;
     font-size: 0.8rem;
   }
 }
