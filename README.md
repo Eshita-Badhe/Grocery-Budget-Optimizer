@@ -17,11 +17,15 @@ A full-stack web application that helps users optimize their grocery list based 
 
 ## 🚀 Features
 
-- Input grocery items with price, quantity, and priority
-- Smart optimization of items to fit within a set budget
-- Displays both original and optimized lists
-- Visual feedback using alerts and pie charts
-- Option to download optimized bill
+- 🛒 Input **grocery items** with **price**, **quantity**, and **priority**
+- 🧠 Smart **optimization** of items to fit within a **set budget**
+- 📋 Displays both **original** and **optimized lists**
+- 📊 Visual feedback using **alerts** and **pie charts**
+- 📥 Option to **download** optimized **bill**
+- 🔐 **Secure Login**: User **authentication** for personalized access
+- 🕓 **History Management**: Auto-**save** and **retrieve** previous entries
+- 📤 **Shareable Lists**: Generate **shareable links** to share optimized bills
+
 
 ## 📚 Tech Stack
 
@@ -35,6 +39,9 @@ A full-stack web application that helps users optimize their grocery list based 
 - Built a full-stack project from scratch using **Flask**
 - Developed an understanding of **UI/UX for mobile-first design**
 - Handled **edge cases and real-world logic constraints**
+- Implemented **user authentication** and **session management** in Flask  
+- Designed and stored **user-specific history logs**  
+- Enabled **secure data sharing** via unique URLs
 - Gained experience with **deployment** on Render
 
 ## 🔗 Links
