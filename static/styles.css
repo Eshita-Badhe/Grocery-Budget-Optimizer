@@ -169,7 +169,7 @@ h2, .section-heading {
 
 /* Table Styling */
 .bill-table {
-  width: 90%;
+  width: 100%;
   border-collapse: collapse;
   background: #fff;
   border-radius: 12px;

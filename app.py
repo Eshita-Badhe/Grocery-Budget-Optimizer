@@ -511,6 +511,8 @@ def submit():
         ))
         mysql.connection.commit()
         history_id = cursor.lastrowid 
+    else:
+        history_id = None
 
     return jsonify({
         "Final_list": final_list,
