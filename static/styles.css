@@ -169,7 +169,7 @@ h2, .section-heading {
 
 /* Table Styling */
 .bill-table {
-  width: 65%;
+  width: 90%;
   border-collapse: collapse;
   background: #fff;
   border-radius: 12px;
@@ -274,7 +274,10 @@ a:hover {
     font-size: 0.95rem;
   }
 
+  
   .bill-table {
+    width: 70%;
+    margin-left: 0.1rem;
     font-size: 0.8rem;
   }
 }
