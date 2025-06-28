@@ -525,7 +525,7 @@ def generate_token():
 @app.route('/generate_share_link', methods=['POST'])
 def generate_share_link():
     data = request.get_json()
-    history_id = data['history_id']  # or fetch by user+timestamp if needed
+    history_id = data['history_id'] 
 
     token = generate_token()
     cursor = mysql.connection.cursor()
@@ -533,28 +533,38 @@ def generate_share_link():
     mysql.connection.commit()
     cursor.close()
 
-    share_url = url_for('shared_page', token=token, _external=True)
+    share_url = url_for('shared_view', token=token, _external=True)
     return jsonify({ 'share_url': share_url })
 
+
 @app.route('/shared/<token>')
-def shared_page(token):
+def shared_view(token):
     cursor = mysql.connection.cursor()
-    cursor.execute("SELECT * FROM history WHERE share_token = %s", (token,))
-    entry = cursor.fetchone()
+    cursor.execute("""
+        SELECT original_list, optimized_list, budget, spent, savings
+        FROM history
+        WHERE share_token = %s
+    """, (token,))
+    data = cursor.fetchone()
     cursor.close()
 
-    if entry:
-        original = json.loads(entry['original_list'])
-        optimized = json.loads(entry['optimized_list'])
-        budget = entry['budget']  # if stored
-        return render_template(
-            'index.html',
-            shared=True,
-            budget=budget,
-            original_list=original,
-            optimized_list=optimized
-        )
-    return "Invalid or expired link", 404
+    if not data:
+        return "Link not found", 404
+
+    statistics = {
+        "spent": data['spent'],
+        "savings": data['savings']
+    }
+
+    return render_template('index.html',
+                           original_list=json.loads(data['original_list']),
+                           optimized_list=json.loads(data['optimized_list']),
+                           budget=data['budget'],
+                           spent=data['spent'],
+                           savings=data['savings'],
+                           statistics=statistics,
+                           from_history=True,
+                           shared_view=True) 
 
 
 if (__name__ == "__main__"):

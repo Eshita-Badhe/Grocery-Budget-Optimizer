@@ -58,8 +58,8 @@ h2, .section-heading {
 
 /* Container */
 .container {
-  width: 75%;
-  width: 800px;
+  width: 90%;
+  max-width: 1000px;
   margin: 5vh auto;
   padding: 2rem;
   background-color: #ffe18f;
@@ -122,14 +122,14 @@ h2, .section-heading {
 }
 
 .card {
-  width: 70%;
+  width: 90%;
   max-width: 900px;
   background-color: #fff;
   border: 0.2rem solid #ccc;
   border-radius: 0.7rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  padding: 1rem;
-  margin: 1rem 0;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
 }
 
 /* Row Layouts */
@@ -143,10 +143,11 @@ h2, .section-heading {
 }
 
 .label {
-  width: 30%;
+  flex: 1 0 25%;
   font-weight: 500;
   font-size: 1rem;
   text-align: left;
+  min-width: 120px;
 }
 
 /* Statistics */
@@ -168,7 +169,7 @@ h2, .section-heading {
 
 /* Table Styling */
 .bill-table {
-  width: 90%;
+  width: 100%;
   border-collapse: collapse;
   background: #fff;
   border-radius: 12px;
@@ -224,7 +225,7 @@ a:hover {
 }
 
 /* Responsive Design */
-@media screen and (max-width: 786px) {
+@media screen and (max-width: 768px) {
   html {
     font-size: 90%;
   }
@@ -281,12 +282,6 @@ a:hover {
 @media screen and (min-width: 1024px) {
   html {
     font-size: 110%;
-  }
-
-  .container,
-  .card {
-    max-width: 1000px;
-    padding: 2rem 3rem;
   }
 
   h1 {

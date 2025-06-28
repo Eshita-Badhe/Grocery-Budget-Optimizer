@@ -88,17 +88,23 @@ function createCard(name = '', price = '', qty = '', unit = '', priority = '') {
 
     document.getElementById("cards").appendChild(card);
 
-    // Automatically add to the list if values are prefilled
-    if (name && price && qty && unit && priority) {
-        // Ensure DOM is updated before triggering the function
-        setTimeout(() => {
-            add_to_the_list(card, add);
-        }, 0);
+    if (name && price && qty && priority) {
+    setTimeout(() => {
+        add_to_the_list(card, add,0);
+
+        // Optionally disable this card to make it read-only in shared view
+        if (typeof shared_view !== 'undefined' && shared_view) {
+            inputs = card.querySelectorAll("input");
+            inputs.forEach(input => input.disabled = true);
+            add.disabled = true;
+        }
+    }, 50);
 }
+
 }
 
 
-function add_to_the_list(card, addButton) {
+function add_to_the_list(card, addButton, load=1) {
     let inputs = card.querySelectorAll("input");
     let data = {
         item: inputs[0].value,
@@ -117,12 +123,14 @@ function add_to_the_list(card, addButton) {
     .then(res => res.json())
     .then(response => {
         console.log("Added:", response);
-        Swal.fire({
+        if (load){
+            Swal.fire({
             icon: 'success',
             title: 'Item Added!',
             text: response.message || "Item successfully added to the list.",
             confirmButtonColor: '#ffa500'
         });
+    }
 
         addButton.textContent = "Edit";
         addButton.disabled = false;
